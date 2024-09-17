@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            margin: 15px;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background-color: #ffdf00;
+            padding: 15px;
+        }
+
+        .main-content {
+            margin-left: 220px;
+            padding: 15px;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #1e1e1e;
+            padding: 10px 20px;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .navbar-brand {
+            font-size: 1.75em;
+            font-weight: bold;
+            color: #ffdf00;
+            text-transform: uppercase;
+        }
+
+        .navbar .navbar-nav {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar .navbar-nav li {
+            margin-left: 20px;
+        }
+
+        .navbar .navbar-nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 500;
+            padding: 8px 15px;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .navbar .navbar-nav a:hover {
+            background-color: #ffdf00;
+            color: #1e1e1e;
+        }
+
+        .navbar .navbar-nav a.active {
+            background-color: #ffdf00;
+            color: #1e1e1e;
+        }
+
+        /* Modal Styling */
+        .modal-content {
+            border-radius: 8px;
+        }
+
+        .modal-header {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+        .modal-footer {
+            background-color: #f8f9fa;
+        }
+
+        #costEstimate {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <span class="navbar-brand">Admin Dashboard</span>
+        <ul class="navbar-nav">
+            <li><a href="team.html" id="homeLink" class="active">Home</a></li>
+            <li><a href="#" id="profileLink">Profile</a></li>
+            <li><a href="#" id="messagesLink">Messages</a></li>
+            <li><a href="#" id="notificationsLink">Notifications</a></li>
+            <li><a href="#" id="settingsLink">Settings</a></li>
+            <li><a href="api/Logout.php" id="logoutLink">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <h4>Filter</h4>
+                <form id="filterForm">
+                    <div class="form-group">
+                        <label for="filterService">Service:</label>
+                        <select id="filterService" name="service" class="form-control">
+                            <option value="">All Services</option>
+                            <option value="air_freight">Air Freight</option>
+                            <option value="sea_freight">Sea Freight</option>
+                            <option value="road_freight">Road Freight</option>
+                            <option value="house_moving">House Moving</option>
+                            <option value="personal_driver">Personal Driver</option>
+                            <option value="logistic_solutions">Logistic Solutions</option>
+                            <option value="industry_solutions">Industry Solutions</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterType">Type:</label>
+                        <select id="filterType" name="type" class="form-control">
+                            <option value="">All Types</option>
+                            <option value="independent_driver">Independent Driver</option>
+                            <option value="company">Company</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Apply Filter</button>
+                </form>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 main-content">
+                <h1 class="my-4">Dashboard</h1>
+
+                <!-- Shipments Section -->
+                <h4>Your Shipments</h4>
+                <div id="shipmentsContainer" class="row"></div>
+
+                <!-- Filtered Results Section -->
+                <h4>Filtered Results</h4>
+                <div id="filteredResultsContainer" class="row"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Information Modal -->
+    <div class="modal fade" id="editInfoModal" tabindex="-1" aria-labelledby="editInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="editInfoForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editInfoModalLabel">Edit Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="editFields"></div>
+                        <div id="editError" class="text-danger"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shipment Details Modal -->
+    <div class="modal fade" id="shipmentDetailsModal" tabindex="-1" aria-labelledby="shipmentDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="shipmentDetailsForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="shipmentDetailsModalLabel">Enter Shipment Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="startAddress">Start Address:</label>
+                            <input type="text" id="startAddress" name="start_address" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="endAddress">End Address:</label>
+                            <input type="text" id="endAddress" name="end_address" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="serviceSelect">Service:</label>
+                            <select id="serviceSelect" name="service" class="form-control" required>
+                                <option value="">Select Service</option>
+                                <option value="air_freight">Air Freight</option>
+                                <option value="sea_freight">Sea Freight</option>
+                                <option value="road_freight">Road Freight</option>
+                                <option value="house_moving">House Moving</option>
+                                <option value="personal_driver">Personal Driver</option>
+                                <option value="logistic_solutions">Logistic Solutions</option>
+                                <option value="industry_solutions">Industry Solutions</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="weight">Weight (kg):</label>
+                            <input type="number" id="weight" name="weight" class="form-control" step="0.01" required>
+                        </div>
+                        <div id="costEstimate" class="text-info"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function populateShipments() {
+                $.ajax({
+                    url: '/api/get_shipments.php',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (shipments) {
+                        $('#shipmentsContainer').empty();
+                        shipments.forEach(shipment => {
+                            const card = `
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Shipment #${shipment.id}</h5>
+                                            <p class="card-text">Service: ${shipment.service}</p>
+                                            <p class="card-text">Date: ${shipment.date}</p>
+                                            <p class="card-text">Status: ${shipment.status}</p>
+                                            <button class="btn btn-primary" onclick="showShipmentDetails(${shipment.driver_id}, '${shipment.service}')">Book Shipment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            $('#shipmentsContainer').append(card);
+                        });
+                    },
+                    error: function () {
+                        alert('Failed to load shipment data.');
+                    }
+                });
+            }
+
+            function showShipmentDetails(driverId, service) {
+                $('#serviceSelect').val(service);
+                $('#shipmentDetailsModal').modal('show');
+                $('#shipmentDetailsForm').off('submit').on('submit', function (event) {
+                    event.preventDefault();
+                    const startAddress = $('#startAddress').val();
+                    const endAddress = $('#endAddress').val();
+                    const weight = $('#weight').val();
+                    const selectedService = $('#serviceSelect').val();
+
+                    if (selectedService) {
+                        $.ajax({
+                            url: '/api/get_cost_estimate.php',
+                            method: 'GET',
+                            data: { service: selectedService, weight: weight },
+                            dataType: 'json',
+                            success: function (data) {
+                                const costPerKm = data.cost_per_km;
+                                const costPerWeight = data.cost_per_weight;
+                                const estimatedCost = (costPerKm * calculateDistance(startAddress, endAddress)) + (costPerWeight * weight);
+                                $('#costEstimate').html(`Estimated Cost: $${estimatedCost.toFixed(2)}`);
+                            },
+                            error: function () {
+                                $('#costEstimate').html('Failed to retrieve cost estimate.');
+                            }
+                        });
+                    }
+                });
+            }
+
+            function calculateDistance(startAddress, endAddress) {
+                // Mock function to calculate distance. Replace with actual implementation.
+                return 100; // Assuming a fixed distance for demo purposes.
+            }
+
+            $('#filterForm').on('submit', function (event) {
+                event.preventDefault();
+                const service = $('#filterService').val();
+                const type = $('#filterType').val();
+                populateFilteredResults(service, type);
+            });
+
+            $('#editInfoForm').on('submit', function (event) {
+                event.preventDefault();
+                const formData = $(this).serialize();
+                $.ajax({
+                    url: '/api/update_user.php',
+                    method: 'POST',
+                    data: formData,
+                    success: function () {
+                        alert('Information updated successfully.');
+                        $('#editInfoModal').modal('hide');
+                        populateShipments();
+                    },
+                    error: function () {
+                        alert('Failed to update information.');
+                    }
+                });
+            });
+
+            populateShipments();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Independent Driver Dashboard - ATPS</title>
+    <link rel="stylesheet" href="css/independent driver.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Driver Dashboard</h2>
+            <ul>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#shipments">My Shipments</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#revenue">Revenue</a></li>
+                <li><a href="#messages">Messages</a></li>
+            </ul>
+        </div>
+
+     
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Profile Section -->
+            <section id="profile">
+                <h3>Profile Information</h3>
+                <div class="profile-details">
+                    <img id="profileImg" src="driver-profile.jpg" alt="Driver Profile Picture" class="profile-img">
+                    <form id="profileForm">
+                        <div>
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div>
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                        <div>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div>
+                            <label for="phoneNumber">Phone Number:</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" required>
+                        </div>
+                        <div>
+                            <label for="bankName">Bank Name:</label>
+                            <input type="text" id="bankName" name="bankName" required>
+                        </div>
+                        <div>
+                            <label for="rib">RIB:</label>
+                            <input type="text" id="rib" name="rib" required>
+                        </div>
+                        <div>
+                            <label for="vehicleId">Vehicle:</label>
+                            <select id="vehicleId" name="vehicleId">
+                                <!-- Options will be populated dynamically -->
+                            </select>
+                        </div>
+                        <button type="submit">Update Profile</button>
+                    </form>
+                    <div id="updateMessage" class="success-message" style="display: none;">
+                        Profile updated successfully!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Shipments Section -->
+            <section id="shipments">
+                <h3>My Shipments</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Shipment ID</th>
+                            <th>Customer</th>
+                            <th>Service</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="shipmentTable">
+                        <!-- Dynamic content populated with JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services">
+                <h3>Services Offered</h3>
+                <ul id="servicesList">
+                    <!-- Dynamic content populated with JavaScript -->
+                </ul>
+
+                <!-- Add Pricing Details -->
+                <h4>Set Pricing for Services</h4>
+                <form id="pricingForm">
+                    <label for="serviceSelect">Select Service:</label>
+                    <select id="serviceSelect" name="service">
+                        <option value="1">Personal Driver</option>
+                        <option value="2">House Moving</option>
+                    </select>
+                    
+                    <div>
+                        <label for="pricePerHour">Price per Hour:</label>
+                        <input type="number" id="pricePerHour" name="pricePerHour" step="0.01" required>
+                    </div>
+
+                    <div>
+                        <label for="pricePerTrip">Price per Trip:</label>
+                        <input type="number" id="pricePerTrip" name="pricePerTrip" step="0.01" required>
+                    </div>
+
+                    <button type="submit">Update Price</button>
+                </form>
+
+                <div id="priceUpdateMessage" class="success-message" style="display: none;">
+                    Pricing updated successfully!
+                </div>
+            </section>
+
+            <!-- Revenue Section -->
+            <section id="revenue">
+                <h3>Revenue Overview</h3>
+                <p><strong>Total Revenue:</strong> $5,000</p>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages">
+                <h3>Customer Messages</h3>
+                <ul id="messageList">
+                    <!-- Dynamic content populated with JavaScript -->
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/independent_driver.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="css/costumer.css">
+</head>
+<body>
+    <header>
+        <h1>Customer Dashboard</h1>
+    </header>
+    <main>
+        <!-- Filters Section -->
+        <section id="filters">
+            <h2>Filter Services</h2>
+            <label for="filterService">Service:</label>
+            <select id="filterService">
+                <option value="">All Services</option>
+                <option value="air">Air Freight</option>
+                <option value="sea">Sea Freight</option>
+                <option value="road">Road Freight</option>
+                <option value="moving">House Moving</option>
+                <option value="driver">Personal Driver</option>
+                <option value="logistics">Logistics Solutions</option>
+                <option value="industry">Industry Solutions</option>
+            </select>
+
+            <label for="filterCompany">Company:</label>
+            <select id="filterCompany">
+                <option value="">All Companies</option>
+                <!-- Options populated dynamically -->
+            </select>
+
+            <label for="filterDriver">Independent Driver:</label>
+            <select id="filterDriver">
+                <option value="">All Drivers</option>
+                <!-- Options populated dynamically -->
+            </select>
+
+            <label for="filterVehicle">Vehicle Type:</label>
+            <select id="filterVehicle">
+                <option value="">All Vehicles</option>
+                <option value="truck">Truck</option>
+                <option value="van">Van</option>
+                <option value="car">Car</option>
+            </select>
+
+            <button id="applyFilters">Apply Filters</button>
+        </section>
+
+        <!-- Shipments Table -->
+        <section id="shipments">
+            <h2>Your Shipments</h2>
+            <table id="shipmentsTable">
+                <thead>
+                    <tr>
+                        <th>Shipment ID</th>
+                        <th>Service</th>
+                        <th>Driver/Company</th>
+                        <th>Vehicle</th>
+                        <th>Start Address</th>
+                        <th>End Address</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Modal for adding a shipment -->
+        <div id="addShipmentModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="closeAddShipment">&times;</span>
+                <h2>Add Shipment</h2>
+                <form id="addShipmentForm">
+                    <label for="service">Service:</label>
+                    <select id="service" name="service" required>
+                        <option value="air">Air Freight</option>
+                        <option value="sea">Sea Freight</option>
+                        <option value="road">Road Freight</option>
+                        <option value="moving">House Moving</option>
+                        <option value="driver">Personal Driver</option>
+                        <option value="logistics">Logistics Solutions</option>
+                        <option value="industry">Industry Solutions</option>
+                    </select>
+
+                    <label for="companyOrDriver">Company/Independent Driver:</label>
+                    <select id="companyOrDriver" name="companyOrDriver" required>
+                        <!-- Options populated dynamically -->
+                    </select>
+
+                    <label for="startAddress">Start Address:</label>
+                    <input type="text" id="startAddress" name="startAddress" required>
+
+                    <label for="endAddress">End Address:</label>
+                    <input type="text" id="endAddress" name="endAddress" required>
+
+                    <button type="submit">Add Shipment</button>
+                </form>
+            </div>
+        </div>
+
+        <button id="addShipmentBtn">Add New Shipment</button>
+    </main>
+
+    <script src="js/costumer.js"></script>
+</body>
+</html>

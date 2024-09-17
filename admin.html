@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/test.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <span class="navbar-brand">Admin Dashboard</span>
+        <ul class="navbar-nav">
+            <li><a href="team.html">Home</a></li>
+            <li><a href="#" id="profileLink">Profile</a></li>
+            <li><a href="#" id="messagesLink">Messages</a></li>
+            <li><a href="#" id="notificationsLink">Notifications</a></li>
+            <li><a href="#" id="settingsLink">Settings</a></li>
+            <li><a href="api/logout.php" id="logoutLink">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="#" id="dashboardLink">Dashboard</a></li>
+            <li><a href="#" id="usersLink">Users</a></li>
+            <li><a href="#" id="driversLink">Drivers</a></li>
+            <li><a href="#" id="shipmentsLink">Shipments</a></li>
+            <li><a href="#" id="companiesLink">Companies</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <h3>Actions</h3>
+            <label for="actionFilter">Select Action:</label>
+            <select id="actionFilter">
+                <option value="consult">Consult</option>
+                <option value="add">Add</option>
+                <option value="delete">Delete</option>
+                <option value="modify">Modify</option>
+            </select>
+
+            <!-- Filters -->
+            <label for="driverTypeFilter">Driver Type:</label>
+            <select id="driverTypeFilter">
+                <option value="all">All</option>
+                <option value="independent">Independent Driver</option>
+                <option value="company">Company Driver</option>
+            </select>
+
+            <label for="serviceFilter">Service Type:</label>
+            <select id="serviceFilter">
+                <option value="all">All</option>
+                <option value="air">Air Freight</option>
+                <option value="sea">Sea Freight</option>
+                <option value="road">Road Freight</option>
+                <option value="moving">House Moving</option>
+                <option value="personal">Personal Driver</option>
+                <option value="logistic">Logistic Solutions</option>
+                <option value="industry">Industry Solutions</option>
+            </select>
+
+            <label for="statusFilter">Status:</label>
+            <select id="statusFilter">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+
+            <button id="applyFilters">Apply Filters</button>
+        </div>
+
+        <!-- Cards and Tables -->
+        <div class="card" id="shipmentCard">
+            <h3>Shipments</h3>
+            <table id="shipmentTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Service</th>
+                        <th>Date</th>
+                        <th>Driver Type</th>
+                        <th>Cost</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card" id="userCard">
+            <h3>Users</h3>
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card" id="driverCard">
+            <h3>Drivers</h3>
+            <table id="driverTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card" id="companyCard">
+            <h3>Companies</h3>
+            <table id="companyTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModals()">&times;</span>
+            <h2>Add New Record</h2>
+            <!-- Dynamic content will be injected here -->
+            <div id="modalContent"></div>
+            <button id="saveRecord">Save</button>
+        </div>
+    </div>
+
+    <!-- Modify Modal -->
+    <div id="modifyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModals()">&times;</span>
+            <h2>Modify Record</h2>
+            <!-- Dynamic content will be injected here -->
+            <div id="modalModifyContent"></div>
+            <button id="updateRecord">Update</button>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModals()">&times;</span>
+            <h2>Delete Record</h2>
+            <p>Are you sure you want to delete this record?</p>
+            <input type="hidden" id="deleteId">
+            <button id="confirmDelete">Delete</button>
+            <button onclick="closeModals()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="js/admin script .js"></script>
+</body>
+</html>

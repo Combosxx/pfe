@@ -1,0 +1,155 @@
+/* Basic Reset and Body Styling */
+body, h1, h2, h3, p, ul, li, table {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+}
+/* Navbar Styling */
+.navbar {
+    background-color: #1e1e1e;
+    padding:20px;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+.navbar .navbar-brand {
+    font-size: 1.5em;
+}
+.navbar .navbar-nav {
+    list-style-type: none;
+    display: flex;
+}
+.navbar .navbar-nav li {
+    margin-left: 20px;
+}
+.navbar .navbar-nav a {
+    color: #ffffff;
+    text-decoration: none;
+}
+/* Sidebar Styling */
+.sidebar {
+    background-color: #1e1e1e;
+    width: 220px;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+}
+.sidebar h2 {
+    color: #ffffff;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar ul li {
+    margin: 20px 0;
+}
+.sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+/* Main Content Styling */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+}
+.filter-section {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+.filter-section label {
+    margin-right: 10px;
+}
+.filter-section select, .filter-section button {
+    margin-right: 10px;
+}
+.card {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+.card h3 {
+    margin-bottom: 10px;
+}
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+th {
+    background-color: #333;
+}
+/* Status Styling */
+.shipment-status.pending { background-color: #ffeb3b; color: #000; }
+.shipment-status.delivered { background-color: #4caf50; color: #fff; }
+.shipment-status.cancelled { background-color: #f44336; color: #fff; }
+.user-status.active { background-color: #4caf50; color: #fff; }
+.user-status.inactive { background-color: #ffeb3b; color: #000; }
+.user-status.suspended { background-color: #f44336; color: #fff; }
+.status.active { background-color: #4caf50; color: #fff; }
+.status.inactive { background-color: #ffeb3b; color: #000; }
+.status.suspended { background-color: #f44336; color: #fff; }
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal-content {
+    background-color: #1e1e1e;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+}
+.close {
+    color: #ffffff;
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.close:hover {
+    color: #f00;
+    cursor: pointer;
+}
+/* Additional Styles for Filters */
+.filter-section select {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+.filter-section button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.filter-section button:hover {
+    background-color: #45a049;
+}

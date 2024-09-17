@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ATPS - Shipping Company Website </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Spinner Start -->
+  <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
+<a href="index.html" class="navbar-brand bg-primary d-flex align-items-center px-4 px-lg-5">
+    <h2 class="mb-2 text-white">ATPS</h2>
+</a>
+<button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav ms-auto p-4 p-lg-0">
+        <a href="index.html" class="nav-item nav-link active">Home</a>
+        <a href="about.html" class="nav-item nav-link">About</a>
+        <a href="service.html" class="nav-item nav-link">Services</a>
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+            <div class="dropdown-menu fade-up m-0">
+                <a href="price.html" class="dropdown-item">Pricing Plan</a>
+                <a href="feature.html" class="dropdown-item">Features</a>
+                <a href="quote.html" class="dropdown-item">Free Quote</a>
+                <a href="team.html" class="dropdown-item">Our Team</a>
+                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                <a href="404.html" class="dropdown-item">404 Page</a>
+            </div>
+        </div>
+        <a href="contact.html" class="nav-item nav-link">Contact</a>
+    </div>
+    <h4 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+216 58 81 04 81</h4>
+    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#connexionModal">Connexion</button>
+  </div>
+</div>
+</div>
+</nav>
+
+
+
+<!-- Navbar End -->
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="connexionModal" tabindex="-1" aria-labelledby="connexionModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-auto">
+                    <img src="img/logo.png" alt="Logo" style="width: 46px;" class="rounded-pill">
+                </div>
+                <div class="col">
+                    <h5 class="modal-title mt-2">ATPS</h5>
+                </div>
+            </div>
+            <form id="loginForm" method="post" class="p-3">
+                <div class="mb-3">
+                    <label for="role">Role:</label>
+                    <select id="role" name="role" class="form-control" required>
+                        <option value="">Select a role</option>
+                        <option value="admin">Admin</option>
+                        <option value="company">Company</option>
+                        <option value="customer">Customer</option>
+                        <option value="independent_driver">Independent Driver</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" name="email" class="form-control" required>
+                    <div id="loginEmailError" style="display: none; color: red;"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="loginPassword">Password:</label>
+                    <div class="input-group">
+                        <input type="password" id="loginPassword" name="password" class="form-control" required>
+                        <button type="button" class="btn btn-link" onclick="showForgotPasswordModal()">Forgot Password?</button>
+                    </div>
+                    <div id="loginPasswordError" style="display: none; color: red;"></div>
+                </div>
+                <div id="loginError" style="display: none; color: red;"></div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="showRegisterModal()">Register</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <form id="forgotPasswordForm">
+            <div class="modal-header">
+                <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="forgotEmail">Email:</label>
+                    <input type="email" id="forgotEmail" name="email" class="form-control" required>
+                    <div id="forgotEmailError" style="display: none; color: red;"></div>
+                </div>
+                <div id="forgotError" style="display: none; color: red;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form id="registerForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="registerEmail">Email:</label>
+                        <input type="email" id="registerEmail" name="email" class="form-control" required>
+                        <div id="registerEmailError" style="display: none; color: red;"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerPassword">Password:</label>
+                        <input type="password" id="registerPassword" name="password" class="form-control" required>
+                        <div id="registerPasswordError" style="display: none; color: red;"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerRepassword">Re-enter Password:</label>
+                        <input type="password" id="registerRepassword" name="repassword" class="form-control" required>
+                        <div id="registerRepasswordError" style="display: none; color: red;"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userType">User Type:</label>
+                        <select id="userType" name="user_type" class="form-control" required onchange="showAdditionalFields()">
+                            <option value="">Select User Type</option>
+                            <option value="independent_driver">Independent Driver</option>
+                            <option value="customer">Customer</option>
+                            <option value="company">Company</option>
+                        </select>
+                    </div>
+                    <div id="additionalFields">
+                        <!-- Independent Driver Fields -->
+                        <div class="independent_driver_fields additional-field hidden">
+                            <div class="mb-3">
+                                <label for="independentFirstName">First Name:</label>
+                                <input type="text" id="independentFirstName" name="first_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="independentLastName">Last Name:</label>
+                                <input type="text" id="independentLastName" name="last_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="independentPhoneNumber">Phone Number:</label>
+                                <input type="text" id="independentPhoneNumber" name="phone_number" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="independentBankName">Bank Name:</label>
+                                <input type="text" id="independentBankName" name="bank_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="independentRib">RIB:</label>
+                                <input type="text" id="independentRib" name="rib" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="vehicleType">Vehicle Type:</label>
+                                <input type="text" id="vehicleType" name="vehicle_type" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="licensePlate">License Plate:</label>
+                                <input type="text" id="licensePlate" name="license_plate" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="capacity">Capacity:</label>
+                                <input type="number" id="capacity" name="capacity" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="vehicleImage">Vehicle Image:</label>
+                                <input type="file" id="vehicleImage" name="vehicle_image" class="form-control" required>
+                            </div>
+                        </div>
+                    
+                        <!-- Customer Fields -->
+                        <div class="customer_fields additional-field hidden">
+                            <div class="mb-3">
+                                <label for="customerFirstName">First Name:</label>
+                                <input type="text" id="customerFirstName" name="first_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="customerLastName">Last Name:</label>
+                                <input type="text" id="customerLastName" name="last_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="customerPhoneNumber">Phone Number:</label>
+                                <input type="text" id="customerPhoneNumber" name="phone_number" class="form-control" required>
+                            </div>
+                        </div>
+                    
+                        <!-- Company Fields -->
+                        <div class="company_fields additional-field hidden">
+                            <div class="mb-3">
+                                <label for="companyName">Company Name:</label>
+                                <input type="text" id="companyName" name="company_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="companyAddress">Company Address:</label>
+                                <input type="text" id="companyAddress" name="company_address" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="companyPhoneNumber">Phone Number:</label>
+                                <input type="text" id="companyPhoneNumber" name="phone_number" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="companyBankName">Bank Name:</label>
+                                <input type="text" id="companyBankName" name="bank_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="companyRib">RIB:</label>
+                                <input type="text" id="companyRib" name="rib" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="registerError" style="display: none; color: red;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5" style="margin-bottom: 6rem;">
+        <div class="container py-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Testimonial</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Testimonial</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Testimonial Start -->
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="text-center">
+                <h6 class="text-secondary text-uppercase">Testimonial</h6>
+                <h1 class="mb-0">Our Clients Say!</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                <div class="testimonial-item p-4 my-5">
+                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>
+                    <div class="d-flex align-items-end mb-4">
+                        <img class="img-fluid flex-shrink-0" src="img/testimonial-1.jpg" style="width: 80px; height: 80px;">
+                        <div class="ms-4">
+                            <h5 class="mb-1">Client Name</h5>
+                            <p class="m-0">Profession</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                </div>
+                <div class="testimonial-item p-4 my-5">
+                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>
+                    <div class="d-flex align-items-end mb-4">
+                        <img class="img-fluid flex-shrink-0" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;">
+                        <div class="ms-4">
+                            <h5 class="mb-1">Client Name</h5>
+                            <p class="m-0">Profession</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                </div>
+                <div class="testimonial-item p-4 my-5">
+                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>
+                    <div class="d-flex align-items-end mb-4">
+                        <img class="img-fluid flex-shrink-0" src="img/testimonial-3.jpg" style="width: 80px; height: 80px;">
+                        <div class="ms-4">
+                            <h5 class="mb-1">Client Name</h5>
+                            <p class="m-0">Profession</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                </div>
+                <div class="testimonial-item p-4 my-5">
+                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>
+                    <div class="d-flex align-items-end mb-4">
+                        <img class="img-fluid flex-shrink-0" src="img/testimonial-4.jpg" style="width: 80px; height: 80px;">
+                        <div class="ms-4">
+                            <h5 class="mb-1">Client Name</h5>
+                            <p class="m-0">Profession</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+        
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Address</h4>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, tunis, TN</p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+216 58 81 04 81</p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i>ATPS@gmail.com</p>
+                <div class="d-flex pt-2">
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Services</h4>
+                <a class="btn btn-link" href="air-freight.html">Air Freight</a>
+                <a class="btn btn-link" href="sea freight.html">Sea Freight</a>
+                <a class="btn btn-link" href="road freight.html">Road Freight</a>
+                <a class="btn btn-link" href="house moving.html">House moving</a>
+                <a class="btn btn-link" href="personl driver.html">Personal driver </a>
+                <a class="btn btn-link" href="logistic solution.html">Logistic Solutions</a>
+                <a class="btn btn-link" href="industry solution.html">Industry solutions</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Quick Links</h4>
+                <a class="btn btn-link" href="about.html">About Us</a>
+                <a class="btn btn-link" href="contact.html">Contact Us</a>
+                <a class="btn btn-link" href="service.html">Our Services</a>
+                <a class="btn btn-link" href="">Terms & Condition</a>
+                <a class="btn btn-link" href="contact.html">Support</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Newsletter</h4>
+                <p>"Stay ahead! Subscribe for logistics updates, insights & offers." </p>
+                <div class="position-relative mx-auto" style="max-width: 400px;">
+                    <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                    <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="index.html">Advanced-Transport-System-Management</a>, All Right Reserved.
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    Designed By <a class="border-bottom" href="https://www.facebook.com/">Zrida Oussama</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer End -->
+
+   <!-- Back to Top -->
+   <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+   <!-- JavaScript Libraries -->
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="lib/wow/wow.min.js"></script>
+   <script src="lib/easing/easing.min.js"></script>
+   <script src="lib/waypoints/waypoints.min.js"></script>
+   <script src="lib/counterup/counterup.min.js"></script>
+   <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+   <!--  Javascript -->
+   <script src="js/main.js"></script>
+</body>
+
+</html>
