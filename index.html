@@ -157,120 +157,29 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form id="registerForm">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="registerModalLabel">Register</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <input type="email" id="email" placeholder="Email" required><br>
+                <input type="password" id="password" placeholder="Password" required><br>
+                <select id="userType">
+                    <option value="independent_driver">Independent Driver</option>
+                    <option value="customer">Customer</option>
+                    <option value="company">Company</option>
+                </select><br>
+                
+                <div id="independentDriverFields" style="display:none;">
+                    <input type="text" id="licenseNumber" placeholder="License Number"><br>
+                    <input type="text" id="vehicleType" placeholder="Vehicle Type"><br>
                 </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="registerEmail">Email:</label>
-                        <input type="email" id="registerEmail" name="email" class="form-control" required>
-                        <div id="registerEmailError" class="text-danger" style="display: none;"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="registerPassword">Password:</label>
-                        <input type="password" id="registerPassword" name="password" class="form-control" required>
-                        <div id="registerPasswordError" class="text-danger" style="display: none;"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="registerRepassword">Re-enter Password:</label>
-                        <input type="password" id="registerRepassword" name="repassword" class="form-control" required>
-                        <div id="registerRepasswordError" class="text-danger" style="display: none;"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="userType">User Type:</label>
-                        <select id="userType" name="user_type" class="form-control" required onchange="showAdditionalFields()">
-                            <option value="">Select User Type</option>
-                            <option value="independent_driver">Independent Driver</option>
-                            <option value="customer">Customer</option>
-                            <option value="company">Company</option>
-                        </select>
-                    </div>
-                    <div id="additionalFields">
-                        <!-- Independent Driver Fields -->
-                        <div class="independent_driver_fields additional-field hidden">
-                            <div class="mb-3">
-                                <label for="independentFirstName">First Name:</label>
-                                <input type="text" id="independentFirstName" name="first_name" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="independentLastName">Last Name:</label>
-                                <input type="text" id="independentLastName" name="last_name" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="independentPhoneNumber">Phone Number:</label>
-                                <input type="text" id="independentPhoneNumber" name="phone_number" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="independentBankName">Bank Name:</label>
-                                <input type="text" id="independentBankName" name="bank_name" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="independentRib">RIB:</label>
-                                <input type="text" id="independentRib" name="rib" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="vehicleType">Vehicle Type:</label>
-                                <input type="text" id="vehicleType" name="vehicle_type" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="licensePlate">License Plate:</label>
-                                <input type="text" id="licensePlate" name="license_plate" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="capacity">Capacity:</label>
-                                <input type="number" id="capacity" name="capacity" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="vehicleImage">Vehicle Image:</label>
-                                <input type="file" id="vehicleImage" name="vehicle_image" class="form-control" required>
-                            </div>
-                        </div>
-                        <!-- Customer Fields -->
-                        <div class="customer_fields additional-field hidden">
-                            <div class="mb-3">
-                                <label for="customerFirstName">First Name:</label>
-                                <input type="text" id="customerFirstName" name="first_name" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="customerLastName">Last Name:</label>
-                                <input type="text" id="customerLastName" name="last_name" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="customerPhoneNumber">Phone Number:</label>
-                                <input type="text" id="customerPhoneNumber" name="phone_number" class="form-control" required>
-                            </div>
-                        </div>
-                        <!-- Company Fields -->
-                        <div class="company_fields additional-field hidden">
-                            <div class="mb-3">
-                                <label for="companyName">Company Name:</label>
-                                <input type="text" id="companyName" name="company_name" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="companyAddress">Company Address:</label>
-                                <input type="text" id="companyAddress" name="company_address" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="companyPhoneNumber">Phone Number:</label>
-                                <input type="text" id="companyPhoneNumber" name="phone_number" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="companyBankName">Bank Name:</label>
-                                <input type="text" id="companyBankName" name="bank_name" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="companyRib">RIB:</label>
-                                <input type="text" id="companyRib" name="rib" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="registerError" class="text-danger" style="display: none;"></div>
+        
+                <div id="customerFields" style="display:none;">
+                    <input type="text" id="address" placeholder="Address"><br>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Register</button>
+        
+                <div id="companyFields" style="display:none;">
+                    <input type="text" id="companyName" placeholder="Company Name"><br>
+                    <input type="text" id="companyRegistration" placeholder="Company Registration"><br>
                 </div>
+        
+                <button type="submit">Register</button>
             </form>
         </div>
     </div>
@@ -816,7 +725,59 @@
    <!-- Back to Top -->
    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top"><i class="bi bi-arrow-up"></i></a>
 
+<script>
+    const form = document.getElementById('registerForm');
+        const userType = document.getElementById('userType');
+        const independentDriverFields = document.getElementById('independentDriverFields');
+        const customerFields = document.getElementById('customerFields');
+        const companyFields = document.getElementById('companyFields');
 
+        // Show/Hide additional fields based on userType
+        userType.addEventListener('change', function() {
+            independentDriverFields.style.display = userType.value === 'independent_driver' ? 'block' : 'none';
+            customerFields.style.display = userType.value === 'customer' ? 'block' : 'none';
+            companyFields.style.display = userType.value === 'company' ? 'block' : 'none';
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                userType: userType.value
+            };
+
+            if (userType.value === 'independent_driver') {
+                data.licenseNumber = document.getElementById('licenseNumber').value;
+                data.vehicleType = document.getElementById('vehicleType').value;
+            } else if (userType.value === 'customer') {
+                data.address = document.getElementById('address').value;
+            } else if (userType.value === 'company') {
+                data.companyName = document.getElementById('companyName').value;
+                data.companyRegistration = document.getElementById('companyRegistration').value;
+            }
+
+            try {
+                const response = await fetch('http://localhost/logistica-1.0.0/api/register.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                if (result.status === 'success') {
+                    alert(result.message);
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+</script>
    <!-- JavaScript Libraries -->
    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -828,4 +789,5 @@
 
    <!--  Javascript -->
    <script src="js/main.js"></script>
-</b
+</body>
+</html>

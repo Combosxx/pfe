@@ -111,51 +111,6 @@
     });
     
 })(jQuery);
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    const role = document.getElementById("role").value;
-
-    // Basic validation
-    if (!email || !password || !role) {
-        alert("Please fill in all fields.");
-        return;
-    }
-
-    // Create the data object to send
-    const loginData = {
-        email: email,
-        password: password,
-        role: role
-    };
-
-    // Send the AJAX request to the server
-    fetch('login.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(loginData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === "success") {
-            // Redirect based on the user role
-            window.location.href = data.user.redirectUrl;
-        } else {
-            // Show error message
-            document.getElementById("loginError").textContent = data.message;
-            document.getElementById("loginError").style.display = "block";
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById("loginError").textContent = "An error occurred. Please try again.";
-        document.getElementById("loginError").style.display = "block";
-    });
-});
 
 // Show Forgot Password Modal
 function showForgotPasswordModal() {
@@ -186,9 +141,6 @@ function showAdditionalFields() {
         document.querySelector('.company_fields').classList.remove('hidden');
     }
 }
-
-// Attach event listener to the userType field
-document.getElementById("userType").addEventListener("change", showAdditionalFields);
 
 // Form validation for login
 document.getElementById("loginForm").addEventListener("submit", function(e) {
